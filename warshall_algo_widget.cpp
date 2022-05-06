@@ -15,7 +15,6 @@ WarshallAlgoWidget::WarshallAlgoWidget(QWidget *parent) :
     ui->cb_size_selection->addItems(size_list);
 
     major_matrix_table = new QTableWidget();
-    minor_matrix_table = new QTableWidget();
 
     ui->pb_launch->setDisabled(true);
 
@@ -98,31 +97,31 @@ void WarshallAlgoWidget::checkFillArray() {
             qDebug() << "Матрица есть";
         }
 
-        uint row_count = adjacency_matrix_table->rowCount();
-        uint column_count = adjacency_matrix_table->columnCount();
+        uint vertex_count = adjacency_matrix_table->rowCount();
 
 
-        major_arr.resize(row_count);
-        for (uint i = 0; i < row_count; i++) {
-            major_arr[i].resize(column_count);
+
+        major_arr.resize(vertex_count);
+        for (uint i = 0; i < vertex_count; i++) {
+            major_arr[i].resize(vertex_count);
         }
 
-        minor_arr.resize(row_count);
-        for (uint i = 0; i < row_count; i++) {
-            minor_arr[i].resize(column_count);
+        minor_arr.resize(vertex_count);
+        for (uint i = 0; i < vertex_count; i++) {
+            minor_arr[i].resize(vertex_count);
         }
 
 
 
-    for (int i = 0; i < adjacency_matrix_table->rowCount(); i++) {
-        for (int j = 0; j < adjacency_matrix_table->columnCount(); j++) {
+    for (uint i = 0; i < vertex_count; i++) {
+        for (uint j = 0; j < vertex_count; j++) {
 
             major_arr[i][j] = adjacency_matrix_table->item(i, j)->text().toInt();
         }
     }
 
-    for (int i = 0; i < adjacency_matrix_table->rowCount(); i++) {
-        for (int j = 0; j < adjacency_matrix_table->columnCount(); j++) {
+    for (uint i = 0; i < vertex_count; i++) {
+        for (uint j = 0; j < vertex_count; j++) {
 
            qDebug() << major_arr[i][j];
         }

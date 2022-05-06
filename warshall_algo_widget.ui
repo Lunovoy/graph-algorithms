@@ -59,7 +59,7 @@
                <item alignment="Qt::AlignHCenter">
                 <widget class="QLabel" name="label_1">
                  <property name="text">
-                  <string>Матрица связности</string>
+                  <string>Матрица смежности</string>
                  </property>
                 </widget>
                </item>

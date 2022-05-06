@@ -31,7 +31,6 @@ public:
     QStringList size_list;
     QTableWidget *adjacency_matrix_table;
     QTableWidget *major_matrix_table;
-    QTableWidget *minor_matrix_table;
 
     void checkFillArray();
     void warshallAlgo();
