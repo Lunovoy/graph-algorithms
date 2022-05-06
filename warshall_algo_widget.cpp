@@ -178,9 +178,3 @@ void WarshallAlgoWidget::setResultMatrixTable() {
     }
 
 }
-
-
-
-
-
-
