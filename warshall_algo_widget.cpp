@@ -12,16 +12,15 @@ WarshallAlgoWidget::WarshallAlgoWidget(QWidget *parent) :
     status_bar = new QStatusBar();
     ui->verticalLayout_20->insertWidget(0, status_bar);
 
-    ui->cb_size_selection_1->addItems(size_list);
-//    ui->cb_size_selection_2->addItems(size_list);
+    ui->cb_size_selection->addItems(size_list);
 
     major_matrix_table = new QTableWidget();
     minor_matrix_table = new QTableWidget();
 
+    ui->pb_launch->setDisabled(true);
 
-
-    QObject::connect(ui->pb_apply_1, &QPushButton::clicked, this, &WarshallAlgoWidget::onPbApply1);
-    QObject::connect(ui->pb_launch_1, &QPushButton::clicked, this, &WarshallAlgoWidget::onPbLaunch1);
+    connect(ui->pb_apply, &QPushButton::clicked, this, &WarshallAlgoWidget::onPbApply);
+    connect(ui->pb_launch, &QPushButton::clicked, this, &WarshallAlgoWidget::onPbLaunch);
 }
 
 WarshallAlgoWidget::~WarshallAlgoWidget()
@@ -29,7 +28,7 @@ WarshallAlgoWidget::~WarshallAlgoWidget()
     delete ui;
 }
 
-void WarshallAlgoWidget::onPbApply1() {
+void WarshallAlgoWidget::onPbApply() {
      qDebug() << "До" << ui->verticalLayout_22->count();
 
      QList<QWidget *> Widgets = ui->scrollAreaWidgetContents_2->findChildren<QWidget *>(QString(), Qt::FindDirectChildrenOnly);
@@ -42,7 +41,7 @@ void WarshallAlgoWidget::onPbApply1() {
      }
 
     qDebug() << "После" << ui->verticalLayout_22->count();
-    int size = ui->cb_size_selection_1->currentIndex() + 2;
+    int size = ui->cb_size_selection->currentIndex() + 2;
 
     adjacency_matrix_table = new QTableWidget();
 
@@ -62,9 +61,12 @@ void WarshallAlgoWidget::onPbApply1() {
 
     ui->verticalLayout_22->addWidget(adjacency_matrix_table);
 
+    ui->pb_launch->setDisabled(false);
+
+
 }
 
-void WarshallAlgoWidget::onPbLaunch1()
+void WarshallAlgoWidget::onPbLaunch()
 {
     checkFillArray();
 

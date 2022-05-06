@@ -17,8 +17,8 @@ class WarshallAlgoWidget : public QWidget
     Q_OBJECT
 
 public slots:
-    void onPbApply1();
-    void onPbLaunch1();
+    void onPbApply();
+    void onPbLaunch();
 
 public:
     explicit WarshallAlgoWidget(QWidget *parent = nullptr);

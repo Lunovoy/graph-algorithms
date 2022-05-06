@@ -1,6 +1,7 @@
 #include "dfs_algo_widget.h"
 #include "ui_dfs_algo_widget.h"
 
+
 DFSAlgoWidget::DFSAlgoWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::DFSAlgoWidget)
@@ -12,11 +13,31 @@ DFSAlgoWidget::DFSAlgoWidget(QWidget *parent) :
     status_bar = new QStatusBar();
     ui->verticalLayout_13->insertWidget(0, status_bar);
 
-//    ui->cb_size_selection_1->addItems(size_list);
-    ui->cb_size_selection_2->addItems(size_list);
+    ui->cb_size_selection->addItems(size_list);
+
+    ui->pb_launch->setDisabled(true);
+
+    connect(ui->pb_apply, &QPushButton::clicked, this, &DFSAlgoWidget::onPbApply);
+    connect(ui->pb_launch, &QPushButton::clicked, this, &DFSAlgoWidget::onPbLaunch);
 }
 
 DFSAlgoWidget::~DFSAlgoWidget()
 {
     delete ui;
+}
+
+
+void DFSAlgoWidget::onPbApply()
+{
+    start_vertex = ui->le_vertex_input->text().toInt();
+    qDebug() << start_vertex;
+
+    if (start_vertex) {
+        ui->pb_launch->setDisabled(false);
+    }
+}
+
+void DFSAlgoWidget::onPbLaunch()
+{
+
 }

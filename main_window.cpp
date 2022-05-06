@@ -8,12 +8,13 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    setWindowTitle("Graph Algorithms");
+
     dfs_widget = new DFSAlgoWidget();
     warshall_widget = new WarshallAlgoWidget();
 
     ui->verticalLayout_12->addWidget(dfs_widget);
     ui->verticalLayout_2->addWidget(warshall_widget);
-
 
 }
 
