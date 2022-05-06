@@ -1,2 +1,2 @@
 # graph-algorithms
-Study project of graph algorithms
+Qt Study project of graph algorithms
