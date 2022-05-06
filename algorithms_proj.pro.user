@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 6.0.1, 2022-05-05T19:46:08. -->
+<!-- Written by QtCreator 6.0.1, 2022-05-06T01:27:32. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -238,9 +238,8 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Algorithms_proj2</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/hellsing/Development/QtProjects/AlgorithmsProj/Algorithms_proj.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/hellsing/Development/QtProjects/AlgorithmsProj/Algorithms_proj.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/hellsing/Development/QtProjects/AlgorithmsProj/algorithms_proj.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/hellsing/Development/QtProjects/AlgorithmsProj/algorithms_proj.pro</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>

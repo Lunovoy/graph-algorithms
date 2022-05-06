@@ -11,15 +11,18 @@ CONFIG += c++11
 SOURCES += \
     dfs_algo_widget.cpp \
     main.cpp \
-    main_window.cpp
+    main_window.cpp \
+    warshall_algo_widget.cpp
 
 HEADERS += \
     dfs_algo_widget.h \
-    main_window.h
+    main_window.h \
+    warshall_algo_widget.h
 
 FORMS += \
     dfs_algo_widget.ui \
-    main_window.ui
+    main_window.ui \
+    warshall_algo_widget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
