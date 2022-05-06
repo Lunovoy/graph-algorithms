@@ -113,7 +113,26 @@
            <property name="frameShadow">
             <enum>QFrame::Raised</enum>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_4">
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <item>
+             <widget class="QFrame" name="frame_40">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_21">
+               <item alignment="Qt::AlignHCenter">
+                <widget class="QLabel" name="label_2">
+                 <property name="text">
+                  <string>Матрица достижимости</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
             <item>
              <widget class="QScrollArea" name="sa_right_1">
               <property name="widgetResizable">
@@ -125,7 +144,7 @@
                  <x>0</x>
                  <y>0</y>
                  <width>361</width>
-                 <height>286</height>
+                 <height>246</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_6"/>
@@ -183,9 +202,15 @@
                </item>
                <item>
                 <widget class="QComboBox" name="cb_size_selection">
+                 <property name="minimumSize">
+                  <size>
+                   <width>150</width>
+                   <height>0</height>
+                  </size>
+                 </property>
                  <property name="maximumSize">
                   <size>
-                   <width>100</width>
+                   <width>150</width>
                    <height>16777215</height>
                   </size>
                  </property>

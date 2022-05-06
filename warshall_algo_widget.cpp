@@ -31,14 +31,24 @@ WarshallAlgoWidget::~WarshallAlgoWidget()
 void WarshallAlgoWidget::onPbApply() {
      qDebug() << "До" << ui->verticalLayout_22->count();
 
-     QList<QWidget *> Widgets = ui->scrollAreaWidgetContents_2->findChildren<QWidget *>(QString(), Qt::FindDirectChildrenOnly);
+     QList<QWidget *> widgets_left = ui->scrollAreaWidgetContents_2->findChildren<QWidget *>(QString(), Qt::FindDirectChildrenOnly);
 
-     qDebug() << Widgets;
+     qDebug() << widgets_left;
 
-     foreach(QWidget * child, Widgets){
-         qDebug() << "Удаление";
+     foreach(QWidget * child, widgets_left){
+         qDebug() << "Удаление матрицы смежности";
         child->deleteLater();
      }
+
+     QList<QWidget *> widgets_right = ui->scrollAreaWidgetContents->findChildren<QWidget *>(QString(), Qt::FindDirectChildrenOnly);
+
+     qDebug() << widgets_right;
+
+     foreach(QWidget * child, widgets_right){
+         qDebug() << "Удаление результата";
+        child->deleteLater();
+     }
+
 
     qDebug() << "После" << ui->verticalLayout_22->count();
     int size = ui->cb_size_selection->currentIndex() + 2;
@@ -50,6 +60,7 @@ void WarshallAlgoWidget::onPbApply() {
 
     major_matrix_table->setColumnCount(size);
     major_matrix_table->setRowCount(size);
+
 
 
     for (uint i = 0; i < (uint)adjacency_matrix_table->columnCount(); i++) {
@@ -78,56 +89,6 @@ void WarshallAlgoWidget::onPbLaunch()
 
 
 }
-
-void WarshallAlgoWidget::warshallAlgo() {
-
-    int matrix_size = adjacency_matrix_table->rowCount();
-
-    for (int j = 0; j < matrix_size; j++){
-        for (int i = 0; i < matrix_size; i++) {
-            if (major_arr[i][j] == 0) {
-                for (int x = 0; x < matrix_size; x++) {
-                    minor_arr[i][x] = major_arr[i][x];
-                }
-            } else {
-                for (int x = 0; x < matrix_size; x++) {
-                    minor_arr[i][x] = minor_arr[i][x] || major_arr[j][x];
-                }
-            }
-        }
-
-        major_arr = minor_arr;
-        setResultMatrixTable();
-
-//        qDebug() << "Детей: " <<ui->verticalLayout_6->count();
-    }
-
-}
-
-void WarshallAlgoWidget::setResultMatrixTable() {
-
-    int size = major_matrix_table->rowCount();
-
-    for (uint i = 0; i < (uint)size; i++) {
-        major_matrix_table->setColumnWidth(i, 50);
-    }
-    for (uint i = 0; i < (uint)size; i++) {
-        major_matrix_table->setRowHeight(i, 50);
-    }
-
-
-    for (int i = 0; i < size; i++){
-        for (int j = 0; j < size; j++) {
-            QTableWidgetItem *itm = new QTableWidgetItem(QString::number(major_arr[i][j]));
-            major_matrix_table->setItem(i, j, itm);
-        }
-    }
-
-}
-
-
-
-
 
 void WarshallAlgoWidget::checkFillArray() {
 
@@ -168,3 +129,58 @@ void WarshallAlgoWidget::checkFillArray() {
     }
     qDebug() << major_arr;
 }
+
+void WarshallAlgoWidget::warshallAlgo() {
+
+    int matrix_size = adjacency_matrix_table->rowCount();
+
+
+
+    for (int j = 0; j < matrix_size; j++){
+        minor_arr = major_arr;
+        for (int i = 0; i < matrix_size; i++) {
+            if (major_arr[i][j] == 0) {
+                for (int x = 0; x < matrix_size; x++) {
+                    minor_arr[i][x] = major_arr[i][x];
+                }
+            } else {
+                for (int x = 0; x < matrix_size; x++) {
+                    minor_arr[i][x] = minor_arr[i][x] || major_arr[j][x];
+                }
+            }
+            qDebug() << "Minor matrix: " <<j << " " << minor_arr << "\n";
+        }
+
+        major_arr = minor_arr;
+        setResultMatrixTable();
+
+    }
+
+}
+
+void WarshallAlgoWidget::setResultMatrixTable() {
+
+    int size = major_matrix_table->rowCount();
+
+    for (uint i = 0; i < (uint)size; i++) {
+        major_matrix_table->setColumnWidth(i, 50);
+    }
+    for (uint i = 0; i < (uint)size; i++) {
+        major_matrix_table->setRowHeight(i, 50);
+    }
+
+
+    for (int i = 0; i < size; i++){
+        for (int j = 0; j < size; j++) {
+            QTableWidgetItem *itm = new QTableWidgetItem(QString::number(major_arr[i][j]));
+            major_matrix_table->setItem(i, j, itm);
+        }
+    }
+
+}
+
+
+
+
+
+

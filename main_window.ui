@@ -48,7 +48,7 @@
          </widget>
          <widget class="QWidget" name="tab_4">
           <attribute name="title">
-           <string>Какой-то алгоритм</string>
+           <string>Поиск макс. потока</string>
           </attribute>
          </widget>
         </widget>
