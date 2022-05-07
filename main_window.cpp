@@ -13,9 +13,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     dfs_widget = new DFSAlgoWidget();
     warshall_widget = new WarshallAlgoWidget();
+    dijkstra_widget = new DijkstraAlgoWidget();
 
     ui->verticalLayout_12->addWidget(dfs_widget);
     ui->verticalLayout_2->addWidget(warshall_widget);
+    ui->verticalLayout_3->addWidget(dijkstra_widget);
 
 }
 
