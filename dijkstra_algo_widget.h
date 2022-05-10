@@ -28,13 +28,13 @@ public:
     QStatusBar *status_bar;
     QStringList size_list;
     QVector<char> used;
-    QVector<int> distance;
+    QVector<int> min_distance;
 
     QTableWidget *adjacency_matrix_table;
     QTableWidget *major_matrix_table;
 
-    int vertex_count;
-    int start_vertex;
+    uint vertex_count;
+    uint start_vertex;
 
     void checkFillArray();
     void dijkstraAlgo();
