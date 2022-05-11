@@ -1,6 +1,8 @@
 #ifndef DIJKSTRA_ALGO_WIDGET_H
 #define DIJKSTRA_ALGO_WIDGET_H
 
+#include <math.h>
+
 #include <QWidget>
 #include <QStatusBar>
 #include <QDebug>

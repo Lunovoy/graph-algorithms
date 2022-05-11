@@ -1,8 +1,6 @@
 #include "dijkstra_algo_widget.h"
 #include "ui_dijkstra_algo_widget.h"
 
-#include <math.h>
-
 
 DijkstraAlgoWidget::DijkstraAlgoWidget(QWidget *parent) :
     QWidget(parent),
@@ -29,46 +27,7 @@ DijkstraAlgoWidget::~DijkstraAlgoWidget()
     delete ui;
 }
 
-void DijkstraAlgoWidget::checkFillArray()
-{
-    int INF = INFINITY;
-    QMap<int, QString> map;
-    map.insert(INF, "inf");
 
-    for (uint i = 0; i < vertex_count; i ++) {
-        for (uint j = 0; j < vertex_count; j ++) {
-            if(!adjacency_matrix_table->item(i, j)){
-                QTableWidgetItem *item = new QTableWidgetItem();
-                item->setText(map.value(INF));
-                adjacency_matrix_table->setItem(i, j, item);
-            }
-        }
-    }
-
-    major_arr.resize(vertex_count);
-    for (uint i = 0; i < (uint)vertex_count; i++) {
-        major_arr[i].resize(vertex_count);
-    }
-
-    used.resize(vertex_count);
-    for (uint i = 0; i < (uint)vertex_count; i++) {
-        used[i] = false;
-    }
-
-
-for (uint i = 0; i < vertex_count; i++) {
-    for (uint j = 0; j < vertex_count; j++) {
-        if(adjacency_matrix_table->item(i, j)->text() == "inf") {
-            major_arr[i][j] = INF;
-        } else {
-            major_arr[i][j] = adjacency_matrix_table->item(i, j)->text().toInt();
-        }
-    }
-}
-
-qDebug() << major_arr;
-
-}
 
 void DijkstraAlgoWidget::onPbApply()
 {
@@ -128,44 +87,92 @@ void DijkstraAlgoWidget::onPbApply()
     ui->verticalLayout_3->addWidget(adjacency_matrix_table);
 }
 
+void DijkstraAlgoWidget::checkFillArray()
+{
+
+    for (uint i = 0; i < vertex_count; i ++) {
+        for (uint j = 0; j < vertex_count; j ++) {
+            if(!adjacency_matrix_table->item(i, j)){
+                QTableWidgetItem *item = new QTableWidgetItem();
+                item->setText("inf");
+                adjacency_matrix_table->setItem(i, j, item);
+            }
+        }
+    }
+
+    min_distance.resize(vertex_count);
+
+    major_arr.resize(vertex_count);
+    for (uint i = 0; i < (uint)vertex_count; i++) {
+        major_arr[i].resize(vertex_count);
+    }
+
+    used.resize(vertex_count);
+    for (uint i = 0; i < (uint)vertex_count; i++) {
+        used[i] = false;
+    }
+
+
+    for (uint i = 0; i < vertex_count; i++) {
+        for (uint j = 0; j < vertex_count; j++) {
+            if(adjacency_matrix_table->item(i, j)->text() == "inf") {
+                major_arr[i][j] = INFINITY;
+            } else {
+                major_arr[i][j] = adjacency_matrix_table->item(i, j)->text().toInt();
+            }
+        }
+    }
+
+    qDebug() << "Major_arr из checkFill" << major_arr;
+
+}
+
+void DijkstraAlgoWidget::dijkstraAlgo()
+{
+    --start_vertex;
+
+    for(uint i = 0; i < vertex_count; i++) {
+        min_distance[i] = major_arr[start_vertex][i];
+        used[i] = false;
+    }
+
+    qDebug() << "Min D: " << min_distance;
+
+    min_distance[start_vertex]=0;
+    int index = 0, u = 0;
+    for (uint i = 0; i < vertex_count; i++) {
+        int min=INT_MAX;
+
+        for (uint j = 0; j < vertex_count; j++) {
+            if (!used[j] && min_distance[j] < min) {
+                min=min_distance[j];
+                index=j;
+            }
+        }
+        u=index;
+        used[u]=true;
+        for(uint j = 0; j < vertex_count; j++) {
+            if (!used[j] && major_arr[u][j]!=INT_MAX && min_distance[u]!=INT_MAX && (min_distance[u]+major_arr[u][j]<min_distance[j])) {
+                        min_distance[j]=min_distance[u]+major_arr[u][j];
+            }
+        }
+    }
+
+}
+
 void DijkstraAlgoWidget::onPbLaunch()
 {
 
     checkFillArray();
 
-//    for(uint i = 0; i < vertex_count; i++) {
-//        min_distance[i] = major_arr[start_vertex][i];
-//        used[i] = false;
-//    }
+    dijkstraAlgo();
 
-//    min_distance[start_vertex]=0;
-//    int index = 0, u = 0;
-//    for (uint i = 0; i < vertex_count; i++) {
-//        int min=INT_MAX;
-
-//        for (uint j = 0; j < vertex_count; j++) {
-//            if (!used[j] && min_distance[j] < min) {
-//                min=min_distance[j];
-//                index=j;
-//            }
-//        }
-//        u=index;
-//        used[u]=true;
-//        for(uint j = 0; j < vertex_count; j++) {
-//            if (!used[j] && major_arr[u][j]!=INT_MAX && min_distance[u]!=INT_MAX && (min_distance[u]+major_arr[u][j]<min_distance[j])) {
-//                        min_distance[j]=min_distance[u]+major_arr[u][j];
-//            }
-//        }
-//    }
-
-//    qDebug() <<"Стоимость пути из начальной вершины до остальных(Алгоритм Дейкстры):\t\n";
-//        for (uint i = 0; i < vertex_count; i++)
-//        {
-//            if (min_distance[i]!=INT_MAX)
-//                qDebug()<<start_vertex<<" -> "<<i<<" = "<<min_distance[i];
-//            else
-//                qDebug()<<start_vertex<<" -> "<<i<<" = "<<"маршрут недоступен";
-//        }
+    for (uint i = 0; i < vertex_count; i++) {
+        QTableWidgetItem *item = new QTableWidgetItem();
+        item->setText(QString::number(min_distance[i]));
+        item->setTextAlignment(Qt::AlignCenter);
+        major_matrix_table->setItem(i, 0, item);
+    }
 
     ui->verticalLayout_4->addWidget(major_matrix_table);
 }
