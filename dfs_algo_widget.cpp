@@ -71,8 +71,13 @@ void DFSAlgoWidget::onPbApply()
     adjacency_matrix_table->setColumnCount(vertex_count);
     adjacency_matrix_table->setRowCount(vertex_count);
 
-    major_matrix_table->setColumnCount(vertex_count);
+    major_matrix_table->setColumnCount(1);
     major_matrix_table->setRowCount(vertex_count);
+
+    QStringList hlist;
+    hlist << "Порядок обхода";
+    major_matrix_table->setHorizontalHeaderLabels(hlist);
+    major_matrix_table->setColumnWidth(0, 200);
 
     QStringList list;
     for (uint i = 1; i <= (uint)vertex_count; i ++) {
