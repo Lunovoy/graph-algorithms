@@ -10,6 +10,12 @@ DijkstraAlgoWidget::DijkstraAlgoWidget(QWidget *parent) :
 
     size_list << "2x2" << "3x3" << "4x4" << "5x5" << "6x6" << "7x7" << "8x8" << "9x9" << "10x10";
 
+    play_field = new QTableWidget();
+
+    green = new QColor(0, 255, 0);
+    black =  new QColor(0, 0, 255);
+    red = new QColor(255, 0, 0);
+
     status_bar = new QStatusBar();
     ui->verticalLayout_13->insertWidget(0, status_bar);
 
@@ -17,7 +23,9 @@ DijkstraAlgoWidget::DijkstraAlgoWidget(QWidget *parent) :
 
     ui->pb_launch->setDisabled(true);
 
+    connect(play_field, SIGNAL(currentCellChanged(int, int, int, int)), this, SLOT(MyEventHandler()));
 
+    connect(ui->pb_create_field, &QPushButton::clicked, this, &DijkstraAlgoWidget::obPbCreateField);
     connect(ui->pb_apply, &QPushButton::clicked, this, &DijkstraAlgoWidget::onPbApply);
     connect(ui->pb_launch, &QPushButton::clicked, this, &DijkstraAlgoWidget::onPbLaunch);
 }
@@ -116,7 +124,7 @@ void DijkstraAlgoWidget::checkFillArray()
     for (uint i = 0; i < vertex_count; i++) {
         for (uint j = 0; j < vertex_count; j++) {
             if(adjacency_matrix_table->item(i, j)->text() == "inf") {
-                major_arr[i][j] = INFINITY;
+                major_arr[i][j] = INT_MAX;
             } else {
                 major_arr[i][j] = adjacency_matrix_table->item(i, j)->text().toInt();
             }
@@ -175,4 +183,54 @@ void DijkstraAlgoWidget::onPbLaunch()
     }
 
     ui->verticalLayout_4->addWidget(major_matrix_table);
+}
+
+void DijkstraAlgoWidget::setupPlayField()
+{
+    if (ui->rb_start_point->isChecked()) {
+        if (play_field->currentItem()->isSelected()) {
+            qDebug() << "Нажата клетка" << play_field->currentItem();
+        }
+    }
+}
+
+void DijkstraAlgoWidget::obPbCreateField()
+{
+    play_field->setColumnCount(4);
+    play_field->setRowCount(4);
+
+    for (uint i = 0; i < 4; i++) {
+        play_field->setColumnWidth(i, 50);
+    }
+    for (uint i = 0; i < 4; i++) {
+        play_field->setRowHeight(i, 50);
+    }
+
+    for (uint i = 0; i < 4; i++) {
+        for (uint j = 0; j < 4; j++) {
+            QTableWidgetItem *item = new QTableWidgetItem();
+            play_field->setItem(i, j, item);
+        }
+    }
+
+    ui->verticalLayout_10->addWidget(play_field);
+
+}
+
+void DijkstraAlgoWidget::MyEventHandler()
+{
+    int i = play_field->currentRow();
+    int j = play_field->currentColumn();
+
+    if(ui->rb_start_point->isChecked()) {
+        play_field->item(i, j)->setBackground(Qt::green);
+    }
+
+    if(ui->rb_barrier->isChecked()) {
+        play_field->item(i, j)->setBackground(Qt::black);
+    }
+
+    if(ui->rb_end_point->isChecked()) {
+        play_field->item(i, j)->setBackground(Qt::red);
+    }
 }

@@ -8,6 +8,12 @@ QWidget
 
 }
 
+/*-----QRadioButton-----*/
+QRadioButton
+{
+    color: #121212;
+}
+
 /*-----QComboBox-----*/
 QComboBox
 {

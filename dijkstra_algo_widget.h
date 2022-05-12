@@ -8,6 +8,8 @@
 #include <QDebug>
 #include <QTableWidget>
 #include <QMap>
+#include <QColor>
+
 
 
 namespace Ui {
@@ -21,6 +23,8 @@ class DijkstraAlgoWidget : public QWidget
 public slots:
     void onPbApply();
     void onPbLaunch();
+    void obPbCreateField();
+    void MyEventHandler();
 
 public:
     explicit DijkstraAlgoWidget(QWidget *parent = nullptr);
@@ -34,12 +38,18 @@ public:
 
     QTableWidget *adjacency_matrix_table;
     QTableWidget *major_matrix_table;
+    QTableWidget *play_field;
+
+    QColor *green;
+    QColor *black;
+    QColor *red;
 
     uint vertex_count;
     uint start_vertex;
 
     void checkFillArray();
     void dijkstraAlgo();
+    void setupPlayField();
 
 private:
     Ui::DijkstraAlgoWidget *ui;
