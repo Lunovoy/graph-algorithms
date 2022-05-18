@@ -24,13 +24,14 @@ public slots:
     void onPbApply();
     void onPbLaunch();
     void obPbCreateField();
-    void MyEventHandler();
+    void myEventHandler();
 
 public:
     explicit DijkstraAlgoWidget(QWidget *parent = nullptr);
     ~DijkstraAlgoWidget();
 
     QVector<QVector<int>> major_arr;
+    QVector<QVector<int>> play_field_arr;
     QStatusBar *status_bar;
     QStringList size_list;
     QVector<char> used;
@@ -50,6 +51,7 @@ public:
     void checkFillArray();
     void dijkstraAlgo();
     void setupPlayField();
+    void setPlayFieldArray();
 
 private:
     Ui::DijkstraAlgoWidget *ui;
