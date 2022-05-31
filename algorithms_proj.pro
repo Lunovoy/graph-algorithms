@@ -11,20 +11,26 @@ CONFIG += c++11
 SOURCES += \
     dfs_algo_widget.cpp \
     dijkstra_algo_widget.cpp \
+    ford_fulkerson_algo_widget.cpp \
     main.cpp \
     main_window.cpp \
+    visual_dijkstra.cpp \
     warshall_algo_widget.cpp
 
 HEADERS += \
     dfs_algo_widget.h \
     dijkstra_algo_widget.h \
+    ford_fulkerson_algo_widget.h \
     main_window.h \
+    visual_dijkstra.h \
     warshall_algo_widget.h
 
 FORMS += \
     dfs_algo_widget.ui \
     dijkstra_algo_widget.ui \
+    ford_fulkerson_algo_widget.ui \
     main_window.ui \
+    visual_dijkstra.ui \
     warshall_algo_widget.ui
 
 # Default rules for deployment.

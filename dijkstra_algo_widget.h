@@ -1,7 +1,7 @@
 #ifndef DIJKSTRA_ALGO_WIDGET_H
 #define DIJKSTRA_ALGO_WIDGET_H
 
-#include <math.h>
+#include <cmath>
 
 #include <QWidget>
 #include <QStatusBar>
@@ -10,6 +10,7 @@
 #include <QMap>
 #include <QColor>
 
+#include "visual_dijkstra.h"
 
 
 namespace Ui {
@@ -23,15 +24,15 @@ class DijkstraAlgoWidget : public QWidget
 public slots:
     void onPbApply();
     void onPbLaunch();
-    void obPbCreateField();
-    void myEventHandler();
+
 
 public:
     explicit DijkstraAlgoWidget(QWidget *parent = nullptr);
     ~DijkstraAlgoWidget();
 
+    VisualDijkstra *visual_dijkstra_widget;
+
     QVector<QVector<int>> major_arr;
-    QVector<QVector<int>> play_field_arr;
     QStatusBar *status_bar;
     QStringList size_list;
     QVector<char> used;
@@ -39,19 +40,14 @@ public:
 
     QTableWidget *adjacency_matrix_table;
     QTableWidget *major_matrix_table;
-    QTableWidget *play_field;
 
-    QColor *green;
-    QColor *black;
-    QColor *red;
 
     uint vertex_count;
     uint start_vertex;
 
     void checkFillArray();
     void dijkstraAlgo();
-    void setupPlayField();
-    void setPlayFieldArray();
+
 
 private:
     Ui::DijkstraAlgoWidget *ui;

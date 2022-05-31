@@ -14,10 +14,12 @@ MainWindow::MainWindow(QWidget *parent)
     dfs_widget = new DFSAlgoWidget();
     warshall_widget = new WarshallAlgoWidget();
     dijkstra_widget = new DijkstraAlgoWidget();
+    ford_fulkerson_widget = new FordFulkersonAlgoWidget();
 
     ui->verticalLayout_12->addWidget(dfs_widget);
     ui->verticalLayout_2->addWidget(warshall_widget);
     ui->verticalLayout_3->addWidget(dijkstra_widget);
+//    ui->verticalLayout_4->addWidget(ford_fulkerson_widget);
 
 }
 
