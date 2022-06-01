@@ -10,7 +10,7 @@
 #include <QMap>
 #include <QColor>
 
-#include "visual_dijkstra.h"
+#include "dijkstraAlgorithm/dijkstraVisual/visual_dijkstra.h"
 
 
 namespace Ui {

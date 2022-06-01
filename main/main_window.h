@@ -1,10 +1,10 @@
 #ifndef MAIN_WINDOW_H
 #define MAIN_WINDOW_H
 
-#include "dfs_algo_widget.h"
-#include "warshall_algo_widget.h"
-#include "dijkstra_algo_widget.h"
-#include "ford_fulkerson_algo_widget.h"
+#include "dfsAlgorithm/dfs_algo_widget.h"
+#include "warshallAlgorithm/warshall_algo_widget.h"
+#include "dijkstraAlgorithm/dijkstraMatrix/dijkstra_algo_widget.h"
+#include "fordFulkersonAlgorithm/ford_fulkerson_algo_widget.h"
 
 #include <QMainWindow>
 
