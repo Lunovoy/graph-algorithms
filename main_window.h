@@ -4,6 +4,7 @@
 #include "dfs_algo_widget.h"
 #include "warshall_algo_widget.h"
 #include "dijkstra_algo_widget.h"
+#include "ford_fulkerson_algo_widget.h"
 
 #include <QMainWindow>
 
@@ -24,6 +25,7 @@ public:
     DFSAlgoWidget *dfs_widget;
     WarshallAlgoWidget *warshall_widget;
     DijkstraAlgoWidget *dijkstra_widget;
+    FordFulkersonAlgoWidget *ford_fulkerson_widget;
 
 
 

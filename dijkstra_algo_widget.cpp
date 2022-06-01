@@ -10,11 +10,8 @@ DijkstraAlgoWidget::DijkstraAlgoWidget(QWidget *parent) :
 
     size_list << "2x2" << "3x3" << "4x4" << "5x5" << "6x6" << "7x7" << "8x8" << "9x9" << "10x10";
 
-    play_field = new QTableWidget();
-
-    green = new QColor(0, 255, 0);
-    black =  new QColor(0, 0, 255);
-    red = new QColor(255, 0, 0);
+    visual_dijkstra_widget = new VisualDijkstra();
+    ui->verticalLayout_7->addWidget(visual_dijkstra_widget);
 
     status_bar = new QStatusBar();
     ui->verticalLayout_13->insertWidget(0, status_bar);
@@ -23,9 +20,6 @@ DijkstraAlgoWidget::DijkstraAlgoWidget(QWidget *parent) :
 
     ui->pb_launch->setDisabled(true);
 
-    connect(play_field, SIGNAL(currentCellChanged(int,int,int,int)), this, SLOT(myEventHandler()));
-
-    connect(ui->pb_create_field, &QPushButton::clicked, this, &DijkstraAlgoWidget::obPbCreateField);
     connect(ui->pb_apply, &QPushButton::clicked, this, &DijkstraAlgoWidget::onPbApply);
     connect(ui->pb_launch, &QPushButton::clicked, this, &DijkstraAlgoWidget::onPbLaunch);
 }
@@ -137,7 +131,8 @@ void DijkstraAlgoWidget::checkFillArray()
 
 void DijkstraAlgoWidget::dijkstraAlgo()
 {
-    --start_vertex;
+
+
 
     for(uint i = 0; i < vertex_count; i++) {
         min_distance[i] = major_arr[start_vertex][i];
@@ -159,17 +154,20 @@ void DijkstraAlgoWidget::dijkstraAlgo()
         used[u]=true;
         for(uint j = 0; j < vertex_count; j++) {
             if (!used[j] && major_arr[u][j]!=INT_MAX && min_distance[u]!=INT_MAX && (min_distance[u]+major_arr[u][j]<min_distance[j])) {
+
                         min_distance[j]=min_distance[u]+major_arr[u][j];
+
             }
         }
     }
-
 }
 
 void DijkstraAlgoWidget::onPbLaunch()
 {
 
     checkFillArray();
+
+    --start_vertex;
 
     dijkstraAlgo();
 
@@ -183,138 +181,4 @@ void DijkstraAlgoWidget::onPbLaunch()
     ui->verticalLayout_4->addWidget(major_matrix_table);
 }
 
-void DijkstraAlgoWidget::setupPlayField()
-{
-    if (ui->rb_start_point->isChecked()) {
-        if (play_field->currentItem()->isSelected()) {
-            qDebug() << "Нажата клетка" << play_field->currentItem();
-        }
-    }
-}
 
-void DijkstraAlgoWidget::setPlayFieldArray()
-{
-    for (uint i = 0; i < 16; i++) {
-        for (uint j = 0; j < 16; j++) {
-            play_field_arr[i][j] = 0;
-        }
-    }
-
-    play_field_arr[0][1] = 1;
-    play_field_arr[0][3] = 1;
-
-    play_field_arr[1][0] = 1;
-    play_field_arr[1][2] = 1;
-    play_field_arr[1][4] = 1;
-
-
-    play_field_arr[2][1] = 1;
-    play_field_arr[2][3] = 1;
-
-    play_field_arr[3][0] = 1;
-    play_field_arr[3][2] = 1;
-
-    play_field_arr[3][8] = 1;
-
-    play_field_arr[4][1] = 1;
-
-    play_field_arr[4][5] = 1;
-    play_field_arr[4][9] = 1;
-
-    play_field_arr[5][2] = 1;
-    play_field_arr[5][4] = 1;
-
-    play_field_arr[5][6] = 1;
-    play_field_arr[5][10] = 1;
-
-    play_field_arr[6][5] = 1;
-    play_field_arr[6][7] = 1;
-
-    play_field_arr[6][11] = 1;
-    play_field_arr[6][13] = 1;
-
-    play_field_arr[7][2] = 1;
-    play_field_arr[7][6] = 1;
-
-    play_field_arr[7][8] = 1;
-    play_field_arr[7][14] = 1;
-
-    play_field_arr[8][3] = 1;
-    play_field_arr[8][7] = 1;
-    play_field_arr[8][15] = 1;
-
-    play_field_arr[9][4] = 1;
-    play_field_arr[9][10] = 1;
-
-    play_field_arr[10][5] = 1;
-    play_field_arr[10][9] = 1;
-    play_field_arr[10][11] = 1;
-
-    play_field_arr[11][6] = 1;
-    play_field_arr[11][10] = 1;
-    play_field_arr[11][12] = 1;
-
-    play_field_arr[12][11] = 1;
-    play_field_arr[12][13] = 1;
-
-    play_field_arr[13][6] = 1;
-    play_field_arr[13][12] = 1;
-    play_field_arr[13][14] = 1;
-
-    play_field_arr[14][7] = 1;
-    play_field_arr[14][13] = 1;
-    play_field_arr[14][15] = 1;
-
-    play_field_arr[15][8] = 1;
-    play_field_arr[15][14] = 1;
-}
-
-void DijkstraAlgoWidget::obPbCreateField()
-{
-    play_field->setColumnCount(4);
-    play_field->setRowCount(4);
-
-    for (uint i = 0; i < 4; i++) {
-        play_field->setColumnWidth(i, 50);
-    }
-    for (uint i = 0; i < 4; i++) {
-        play_field->setRowHeight(i, 50);
-    }
-
-    for (uint i = 0; i < 4; i++) {
-        for (uint j = 0; j < 4; j++) {
-            QTableWidgetItem *item = new QTableWidgetItem();
-            play_field->setItem(i, j, item);
-        }
-    }
-
-    play_field_arr.resize(16);
-    for (uint i = 0; i < 16; i++) {
-        play_field_arr[i].resize(16);
-    }
-
-
-    setPlayFieldArray();
-
-    ui->verticalLayout_10->addWidget(play_field);
-
-}
-
-void DijkstraAlgoWidget::myEventHandler()
-{
-    int i = play_field->currentRow();
-    int j = play_field->currentColumn();
-
-    if(ui->rb_start_point->isChecked()) {
-        play_field->item(i, j)->setBackground(Qt::green);
-        start_vertex = i+1;
-    }
-
-    if(ui->rb_barrier->isChecked()) {
-        play_field->item(i, j)->setBackground(Qt::black);
-    }
-
-    if(ui->rb_end_point->isChecked()) {
-        play_field->item(i, j)->setBackground(Qt::red);
-    }
-}
