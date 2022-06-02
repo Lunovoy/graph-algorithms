@@ -99,6 +99,9 @@ void DijkstraAlgoWidget::checkFillArray()
                 item->setText("inf");
                 adjacency_matrix_table->setItem(i, j, item);
             }
+            else if (adjacency_matrix_table->item(i, j)->text().isEmpty()){
+                adjacency_matrix_table->item(i, j)->setText("inf");
+            }
         }
     }
 
