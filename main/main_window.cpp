@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->verticalLayout_12->addWidget(dfs_widget);
     ui->verticalLayout_2->addWidget(warshall_widget);
     ui->verticalLayout_3->addWidget(dijkstra_widget);
-//    ui->verticalLayout_4->addWidget(ford_fulkerson_widget);
+    ui->verticalLayout_4->addWidget(ford_fulkerson_widget);
 
 }
 

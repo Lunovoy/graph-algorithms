@@ -24,8 +24,15 @@ The C++/Qt Study project of graph algorithms
 ![dijkstra's image](images/DijkstraMatrix.png)
 ![dijkstra's image](images/DijkstraVisual.png)
 
+* green - start point
+* red - end point
+* black - barriers
+
+
 
 ## Ford-Fulkerson algorithm
+
+![ford-fulkerson image](images/FordFulkerson.png)
 
 ### _Remarque:_
 

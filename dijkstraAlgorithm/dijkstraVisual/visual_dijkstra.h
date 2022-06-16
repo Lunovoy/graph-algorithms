@@ -1,7 +1,7 @@
 #ifndef VISUAL_DIJKSTRA_H
 #define VISUAL_DIJKSTRA_H
 
-
+#include <cmath>
 
 #include <QWidget>
 #include <QTableWidget>
