@@ -37,11 +37,6 @@ public:
     bool bfs(int s, int t, int parent[]);
 
 
-//    int bfs(int v,int *parent);
-//    int max_flow();
-
-
-
     QStringList size_list;
     QStringList vertex_done_list;
 
@@ -51,9 +46,6 @@ public:
     int vertex_count;
     int start_vertex;
     int end_vertex;
-
-//    int capacity[INT_MAX], onEnd[INT_MAX], nextEdge[INT_MAX], edgeCount;
-//    int firstEdge[INT_MAX];
 
     void checkFillArray();
     int findFlow(int u, int flow);

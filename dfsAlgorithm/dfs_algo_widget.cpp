@@ -1,6 +1,8 @@
 #include "dfs_algo_widget.h"
 #include "ui_dfs_algo_widget.h"
 
+#include "QStack"
+
 
 DFSAlgoWidget::DFSAlgoWidget(QWidget *parent) :
     QWidget(parent),
@@ -16,6 +18,8 @@ DFSAlgoWidget::DFSAlgoWidget(QWidget *parent) :
     ui->cb_size_selection->addItems(size_list);
 
     ui->pb_launch->setDisabled(true);
+
+    stack.resize(vertex_count);
 
 
     connect(ui->pb_apply, &QPushButton::clicked, this, &DFSAlgoWidget::onPbApply);
@@ -128,14 +132,22 @@ void DFSAlgoWidget::checkFillArray() {
 
 void DFSAlgoWidget::dfsAlgo(int v) {
 
-    qDebug() << "Переданная вершина в dfs: " << v;
-    used[v] = true;
-    vertex_done_list << QString::number(v+1);
+
+    stack.push(v);
+
+    int add = stack.pop();
+
+    used[add] = true;
+    vertex_done_list << QString::number(add+1);
     for (int i = 0; i < vertex_count; ++i) {
-        if(major_arr[v][i] == 1 && used[i] == false){
-            dfsAlgo(i);
+        if(major_arr[add][i] == 1 && used[i] == false){
+            stack.push(i);
         }
     }
+    if (!stack.isEmpty()) {
+        dfsAlgo(stack.pop());
+    }
+
 }
 
 void DFSAlgoWidget::onPbLaunch()
@@ -146,7 +158,8 @@ void DFSAlgoWidget::onPbLaunch()
     start_vertex = ui->le_vertex_input->text().toInt();
 
     qDebug() << "Вершина, передаваемая в dfsAlgo" <<start_vertex;
-    dfsAlgo(start_vertex-1);
+    --start_vertex;
+    dfsAlgo(start_vertex);
 
     major_matrix_table->setVerticalHeaderLabels(vertex_done_list);
 

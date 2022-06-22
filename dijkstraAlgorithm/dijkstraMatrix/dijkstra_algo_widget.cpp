@@ -34,6 +34,8 @@ DijkstraAlgoWidget::~DijkstraAlgoWidget()
 void DijkstraAlgoWidget::onPbApply()
 {
     start_vertex = ui->le_vertex_input->text().toInt();
+    end_vertex = ui->le_end_v->text().toInt();
+
     qDebug() << "Вершина, взятая из поля в onPbApply" << start_vertex;
 
     vertex_count = ui->cb_size_selection->currentIndex() + 2;
@@ -163,6 +165,47 @@ void DijkstraAlgoWidget::dijkstraAlgo()
             }
         }
     }
+
+    //Восстановление пути
+    QVector<int> ver;
+    ver.resize(vertex_count); // массив посещенных вершин
+    uint end = end_vertex; // индекс конечной вершины
+    qDebug() << start_vertex << " :: " << end;
+
+    ver[0] = end; // начальный элемент - конечная вершина
+    int k = 1; // индекс предыдущей вершины
+    int weight = min_distance[end]; // вес конечной вершины
+
+    QString route;
+    route.append(QString::number(end_vertex+1));
+
+    while (end != start_vertex) {
+
+        for (uint i = 0; i < vertex_count; i++) { // просматриваем все вершины
+            if (major_arr[i][end] != 0 && major_arr[i][end] != INT_MAX)   // если связь есть
+            {
+                int temp = weight - major_arr[i][end]; // определяем вес пути из предыдущей вершины
+                if (temp == min_distance[i]) // если вес совпал с рассчитанным
+                {                 // значит из этой вершины и был переход
+                    weight = temp; // сохраняем новый вес
+                    end = i;       // сохраняем предыдущую вершину
+                    ver[k] = i; // и записываем ее в массив
+                    if (i != end_vertex && i != start_vertex) {
+                        route.append("->");
+                        route.append(QString::number(i+1));
+                    }
+                    ++k;
+                }
+            }
+        }
+    }
+
+    route.append("->");
+    route.append(QString::number(start_vertex+1));
+
+    ui->label_route->setText(route);
+
+    ui->label_result->setText(QString::number(min_distance[end_vertex]));
 }
 
 void DijkstraAlgoWidget::onPbLaunch()
@@ -171,6 +214,7 @@ void DijkstraAlgoWidget::onPbLaunch()
     checkFillArray();
 
     --start_vertex;
+    --end_vertex;
 
     dijkstraAlgo();
 

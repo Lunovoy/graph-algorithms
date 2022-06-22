@@ -44,6 +44,7 @@ public:
 
     uint vertex_count;
     uint start_vertex;
+    uint end_vertex;
 
     void checkFillArray();
     void dijkstraAlgo();

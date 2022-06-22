@@ -132,7 +132,7 @@
                         <x>0</x>
                         <y>0</y>
                         <width>367</width>
-                        <height>226</height>
+                        <height>138</height>
                        </rect>
                       </property>
                       <layout class="QVBoxLayout" name="verticalLayout_3"/>
@@ -165,7 +165,7 @@
                      <x>0</x>
                      <y>0</y>
                      <width>387</width>
-                     <height>286</height>
+                     <height>198</height>
                     </rect>
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_4"/>
@@ -317,6 +317,68 @@
                              <width>100</width>
                              <height>16777215</height>
                             </size>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </widget>
+                      </item>
+                      <item alignment="Qt::AlignLeft">
+                       <widget class="QFrame" name="frame_4">
+                        <property name="frameShape">
+                         <enum>QFrame::StyledPanel</enum>
+                        </property>
+                        <property name="frameShadow">
+                         <enum>QFrame::Raised</enum>
+                        </property>
+                        <layout class="QHBoxLayout" name="horizontalLayout_4">
+                         <item>
+                          <widget class="QLabel" name="label_3">
+                           <property name="text">
+                            <string>Конец</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QLineEdit" name="le_end_v"/>
+                         </item>
+                        </layout>
+                       </widget>
+                      </item>
+                      <item alignment="Qt::AlignLeft">
+                       <widget class="QFrame" name="frame_5">
+                        <property name="frameShape">
+                         <enum>QFrame::StyledPanel</enum>
+                        </property>
+                        <property name="frameShadow">
+                         <enum>QFrame::Raised</enum>
+                        </property>
+                        <layout class="QHBoxLayout" name="horizontalLayout_5">
+                         <item>
+                          <widget class="QLabel" name="label_5">
+                           <property name="text">
+                            <string>Кратчайший путь</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QLabel" name="label_route">
+                           <property name="text">
+                            <string/>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QLabel" name="label_10">
+                           <property name="text">
+                            <string>Расстояние</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QLabel" name="label_result">
+                           <property name="text">
+                            <string/>
                            </property>
                           </widget>
                          </item>
